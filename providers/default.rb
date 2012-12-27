@@ -48,7 +48,7 @@ end
 def sym_link_zshrc(dir)
   link "#{dir}/.zshrc" do
     to "#{dir}/.oh-my-zsh/templates/zshrc.zsh-template"
-    not_if "test -R #{dir}/.zshrc"
+    not_if {test "R", "#{dir}/.zshrc"}
   end
 end
 
