@@ -22,10 +22,11 @@ require 'pathname'
 action :create do
   user = new_resource.user
   home_dir = Pathname.new(Etc.getpwnam(user).dir).expand_path
+  theme = new_resource.theme || 'robbyrussell'
   
   install_packages
   clone_oh_my_zsh(home_dir, user)
-  sym_link_zshrc(home_dir)
+  render_zshrc(home_dir, user, theme)
   set_zsh_default(user)
 end
 
@@ -45,10 +46,17 @@ def clone_oh_my_zsh(dir, user)
   end
 end
 
-def sym_link_zshrc(dir)
-  link "#{dir}/.zshrc" do
-    to "#{dir}/.oh-my-zsh/templates/zshrc.zsh-template"
-    not_if {test "R", "#{dir}/.zshrc"}
+def render_zshrc(dir, user, theme)
+  template "#{dir}/.zshrc" do
+    source "zshrc.erb"
+    cookbook 'oh_my_zsh'
+    mode 0644
+    owner user
+    group user
+    variables({
+       :theme => theme
+    })
+    not_if { test "R", "#{dir}/.zshrc" }
   end
 end
 
@@ -57,7 +65,7 @@ def set_zsh_default(user)
     command "su -l -c 'chsh -s /bin/zsh #{user}'"
     cwd '/root'
     user "root"
-    not_if {Etc.getpwnam(user).shell.include?("zsh")}
+    not_if { Etc.getpwnam(user).shell.include?("zsh") }
   end
 end
 

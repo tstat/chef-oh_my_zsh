@@ -21,6 +21,7 @@ actions :create
 default_action :create
 
 attribute :user, :kind_of => String, :name_attribute => true
+attribute :theme, :kind_of => String
 
 def initialize(*args)
   super

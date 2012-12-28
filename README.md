@@ -19,4 +19,12 @@ sym-linked if one doesn't already exist, and zsh will be set as the default shel
 oh_my_zsh 'username'
 ```
 
+Additionally you can specify the oh-my-zsh theme you want using the theme resource.
+
+```ruby
+oh_my_zsh 'username' do
+  theme 'theme'
+end
+```
+
 Yay! Less typing in the future!!!
