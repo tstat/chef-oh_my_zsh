@@ -1,3 +1,4 @@
+name             "oh_my_zsh"
 maintainer       "Travis Staton"
 maintainer_email "hello@travisstaton.com"
 license          "Apache 2.0"

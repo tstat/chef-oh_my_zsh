@@ -28,6 +28,7 @@ action :create do
   clone_oh_my_zsh(home_dir, user)
   render_zshrc(home_dir, user, theme)
   set_zsh_default(user)
+  new_resource.updated_by_last_action(true)
 end
 
 def install_packages
@@ -42,7 +43,7 @@ def clone_oh_my_zsh(dir, user)
     reference "master"
     destination "#{dir}/.oh-my-zsh"
     action :sync
-    user "#{user}"
+    user user
   end
 end
 
