@@ -13,17 +13,18 @@ Just add oh_my_zsh as one of your dependencies in your metadata.rb.
 Usage
 -----
 Simply pass a username to this LWRP and zsh/oh-my-zsh will be installed, the .zshrc template will be 
-sym-linked if one doesn't already exist, and zsh will be set as the default shell for that user.
+rendered if one doesn't already exist, and zsh will be set as the default shell for that user.
 
 ```ruby
 oh_my_zsh 'username'
 ```
 
-Additionally you can specify the oh-my-zsh theme you want using the theme resource.
+Additionally you can specify the theme and plugins you want using the appropriate resources.
 
 ```ruby
 oh_my_zsh 'username' do
   theme 'theme'
+  plugins ['git', 'rbenv', 'vagrant']
 end
 ```
 

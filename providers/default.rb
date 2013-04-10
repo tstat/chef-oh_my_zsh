@@ -48,6 +48,8 @@ def clone_oh_my_zsh(dir, user)
 end
 
 def render_zshrc(dir, user, theme)
+  plugins = Array(new_resource.plugins).join ' '
+
   template "#{dir}/.zshrc" do
     source "zshrc.erb"
     cookbook 'oh_my_zsh'
@@ -55,7 +57,8 @@ def render_zshrc(dir, user, theme)
     owner user
     group user
     variables({
-       :theme => theme
+       :theme => theme,
+       :plugins => plugins
     })
     not_if { test "R", "#{dir}/.zshrc" }
   end
