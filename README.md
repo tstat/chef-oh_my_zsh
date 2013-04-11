@@ -28,4 +28,15 @@ oh_my_zsh 'username' do
 end
 ```
 
+If you wish to customize your .zshrc file outside of Chef you can modify the manage_zshrc resource.
+if set to false the .zshrc template will not be modified if it already exists.
+
+```ruby
+oh_my_zsh 'username' do
+  theme 'theme'
+  plugins ['git', 'rbenv', 'vagrant']
+  manage_zshrc false
+end
+```
+
 Yay! Less typing in the future!!!
