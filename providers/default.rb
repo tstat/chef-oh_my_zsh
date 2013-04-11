@@ -60,7 +60,7 @@ def render_zshrc(dir, user, theme)
        :theme => theme,
        :plugins => plugins
     })
-    not_if { test "R", "#{dir}/.zshrc" }
+    not_if { test "R", "#{dir}/.zshrc" } unless new_resource.manage_zshrc
   end
 end
 
