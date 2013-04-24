@@ -50,17 +50,18 @@ end
 def render_zshrc(dir, user, theme)
   plugins = Array(new_resource.plugins).join ' '
 
-  template "#{dir}/.zshrc" do
-    source "zshrc.erb"
-    cookbook 'oh_my_zsh'
-    mode 0644
-    owner user
-    group user
-    variables({
-       :theme => theme,
-       :plugins => plugins
-    })
-    not_if { test "R", "#{dir}/.zshrc" } unless new_resource.manage_zshrc
+  if new_resource.manage_zshrc
+    template "#{dir}/.zshrc" do
+      source "zshrc.erb"
+      cookbook 'oh_my_zsh'
+      mode 0644
+      owner user
+      group user
+      variables({
+         :theme => theme,
+         :plugins => plugins
+      })
+    end
   end
 end
 

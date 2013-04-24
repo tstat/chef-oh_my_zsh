@@ -29,7 +29,7 @@ end
 ```
 
 If you wish to customize your .zshrc file outside of Chef you can modify the manage_zshrc resource.
-if set to false the .zshrc file will not be modified if it already exists. This may be useful if you 
+if set to false the .zshrc file will not be rendered. This may be useful if you 
 are deploying your dot-files through some other method.
 
 ```ruby
