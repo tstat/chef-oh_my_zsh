@@ -49,6 +49,7 @@ end
 
 def render_zshrc(dir, user, theme)
   plugins = Array(new_resource.plugins).join ' '
+  aliases = new_resource.aliases
 
   if new_resource.manage_zshrc
     template "#{dir}/.zshrc" do
@@ -59,7 +60,8 @@ def render_zshrc(dir, user, theme)
       group user
       variables({
          :theme => theme,
-         :plugins => plugins
+         :plugins => plugins,
+         :aliases => aliases
       })
     end
   end

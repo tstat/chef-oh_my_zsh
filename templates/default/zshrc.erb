@@ -36,4 +36,8 @@ plugins=(<%= @plugins %>)
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
+<% if @aliases %>
+<% @aliases.each_pair do |k, v| %>
+<%= "alias #{k.to_s}='#{v}'" %>
+<% end %>
+<% end %>

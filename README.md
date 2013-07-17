@@ -19,12 +19,13 @@ rendered if one doesn't already exist, and zsh will be set as the default shell 
 oh_my_zsh 'username'
 ```
 
-Additionally you can specify the theme and plugins you want using the appropriate resources.
+Additionally you can specify the theme, plugins, and aliases you want using the appropriate resources.
 
 ```ruby
 oh_my_zsh 'username' do
   theme 'theme'
   plugins ['git', 'rbenv', 'vagrant']
+  aliases :be => 'bundle exec', :rs => 'bundle exec rails server'
 end
 ```
 
@@ -34,8 +35,6 @@ are deploying your dot-files through some other method.
 
 ```ruby
 oh_my_zsh 'username' do
-  theme 'theme'
-  plugins ['git', 'rbenv', 'vagrant']
   manage_zshrc false
 end
 ```
