@@ -25,6 +25,7 @@ attribute :theme, :kind_of => String
 attribute :plugins, :kind_of => [String, Array], :default => ['git']
 attribute :aliases, :kind_of => Hash
 attribute :manage_zshrc, :kind_of => [TrueClass, FalseClass], :default => true
+attribute :group, :kind_of => String
 
 def initialize(*args)
   super
