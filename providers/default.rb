@@ -21,12 +21,13 @@ require 'pathname'
 
 action :create do
   user = new_resource.user
+  group = new_resource.group || new_resource.user
   home_dir = Pathname.new(Etc.getpwnam(user).dir).expand_path
   theme = new_resource.theme || 'robbyrussell'
-  
+
   install_packages
   clone_oh_my_zsh(home_dir, user)
-  render_zshrc(home_dir, user, theme)
+  render_zshrc(home_dir, user, group, theme)
   set_zsh_default(user)
   new_resource.updated_by_last_action(true)
 end
@@ -47,7 +48,7 @@ def clone_oh_my_zsh(dir, user)
   end
 end
 
-def render_zshrc(dir, user, theme)
+def render_zshrc(dir, user, group, theme)
   plugins = Array(new_resource.plugins).join ' '
   aliases = new_resource.aliases
 
@@ -57,7 +58,7 @@ def render_zshrc(dir, user, theme)
       cookbook 'oh_my_zsh'
       mode 0644
       owner user
-      group user
+      group group
       variables({
          :theme => theme,
          :plugins => plugins,
